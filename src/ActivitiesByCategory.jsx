@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
-import { NoteApi } from './NoteApi.js'
+import { ActivitiesApi } from './ActivitiesApi.js'
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-export default function ActivitiesByCategory({ categoryFromParent }) {
+export default function ActivitiesByCategory({ categoryFromParent, keywordFromParent }) {
     const [activities, setActivities] = useState([]);    
 
     useEffect(() => {
         const debounce = setTimeout(() => {
-          populateActivities(categoryFromParent);
+          populateActivities(categoryFromParent, keywordFromParent);
     
         }, 2000)
         return () => clearTimeout(debounce);
       }, [activities]);
     
-    const populateActivities = (category) => {
+    const populateActivities = (category, keyword) => {
     
-    NoteApi.getActivitiesByCategory(category)
-        .then((json) => {
-            json ? setActivities(json) : []            
-        })
-        .catch((x) => {             
-            setActivities([]);            
-        });    
+        ActivitiesApi.getActivitiesByCategory(category, keyword)
+            .then((json) => {
+                json ? setActivities(json) : []            
+            })
+            .catch((x) => {             
+                setActivities([]);            
+            });    
     }
 
     return activities.length > 0 ? (

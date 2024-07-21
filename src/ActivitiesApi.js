@@ -208,15 +208,18 @@ const activities = [
     }//////////    
 ];
 
-export const NoteApi = {
+const findStr = (arr, str) => arr.some(e => e.checked && e.category.toLowerCase().search(str.toLowerCase()) !== -1);
 
-    getCategories: async () => {
-        const categories = [...new Set(activities.map(item => item.category))];
-        return categories;
+export const ActivitiesApi = {
+
+    getCategories: async (keyword, categories) => {
+        const list = activities.filter((item) => (keyword.length == 0 ||item.name.toLowerCase().includes(keyword.toLowerCase())) && (categories.length == 0 || findStr(categories, item.category)));
+        const categoriesFiltered = [...new Set(list.map(item => item.category))];
+        return categoriesFiltered;        
     },
 
-    getActivitiesByCategory: async (category) => {
-        const list = activities.filter((item) => item.category === category);
+    getActivitiesByCategory: async (category, keyword) => {
+        const list = activities.filter((item) => item.category === category && item.name.toLowerCase().includes(keyword.toLowerCase()));
         return list;
     }
 };
