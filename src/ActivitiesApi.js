@@ -205,7 +205,122 @@ const activities = [
         "id": "40",
         "name": "Volleyball",
         "category": "Sports"
-    }//////////    
+    },//////////    
+    {
+        "id": "41",
+        "name": "Online - Adult",
+        "category": "Online Programs"
+    },
+    {
+        "id": "42",
+        "name": "Online - Arts",
+        "category": "Online Programs"
+    },
+    {
+        "id": "43",
+        "name": "Online - Heritage",
+        "category": "Online Programs"
+    },
+    {
+        "id": "44",
+        "name": "Online - Seniors",
+        "category": "Online Programs"
+    },//////////    
+    {
+        "id": "45",
+        "name": "Adapted Courses",
+        "category": "General Interest"
+    },
+    {
+        "id": "46",
+        "name": "Birthday Parties",
+        "category": "General Interest"
+    },
+    {
+        "id": "47",
+        "name": "Bus Trips",
+        "category": "General Interest"
+    },
+    {
+        "id": "48",
+        "name": "Cooking",
+        "category": "General Interest"
+    },
+    {
+        "id": "49",
+        "name": "Drop In 0-12",
+        "category": "General Interest"
+    },
+    {
+        "id": "50",
+        "name": "Drop In Seniors Services",
+        "category": "General Interest"
+    },
+    {
+        "id": "51",
+        "name": "Drop In Youth Services",
+        "category": "General Interest"
+    },
+    {
+        "id": "52",
+        "name": "Facility Visits and Guided Tours",
+        "category": "General Interest"
+    },    
+    {
+        "id": "53",
+        "name": "First Aid",
+        "category": "General Interest"
+    },
+    {
+        "id": "54",
+        "name": "Languages",
+        "category": "General Interest"
+    },
+    {
+        "id": "55",
+        "name": "Nature Discovery",
+        "category": "General Interest"
+    },
+    {
+        "id": "56",
+        "name": "One Day Wonders",
+        "category": "General Interest"
+    },
+    {
+        "id": "57",
+        "name": "Personal Development",
+        "category": "General Interest"
+    },
+    {
+        "id": "58",
+        "name": "Preschool",
+        "category": "General Interest"
+    },
+    {
+        "id": "59",
+        "name": "Science",
+        "category": "General Interest"
+    },
+    {
+        "id": "60",
+        "name": "Seniors Services Activities",
+        "category": "General Interest"
+    },
+    {
+        "id": "61",
+        "name": "Seniors Services Special Events",
+        "category": "General Interest"
+    },    
+    {
+        "id": "62",
+        "name": "Special Events",
+        "category": "General Interest"
+    },    
+    {
+        "id": "63",
+        "name": "Workshops",
+        "category": "General Interest"
+    },//////////    
 ];
 
 const findStr = (arr, str) => arr.some(e => e.checked && e.category.toLowerCase().search(str.toLowerCase()) !== -1);
@@ -215,11 +330,11 @@ export const ActivitiesApi = {
     getCategories: async (keyword, categories) => {
         const list = activities.filter((item) => (keyword.length == 0 ||item.name.toLowerCase().includes(keyword.toLowerCase())) && (categories.length == 0 || findStr(categories, item.category)));
         const categoriesFiltered = [...new Set(list.map(item => item.category))];
-        return categoriesFiltered;        
+        return categoriesFiltered.sort();
     },
 
     getActivitiesByCategory: async (category, keyword) => {
         const list = activities.filter((item) => item.category === category && item.name.toLowerCase().includes(keyword.toLowerCase()));
-        return list;
+        return list.sort();
     }
 };
